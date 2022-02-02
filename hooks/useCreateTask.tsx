@@ -32,6 +32,9 @@ export const useCreateTask = ({ navigation }: Props) => {
     //editedTaskの中のtitleだけを随時更新
     dispatch(setEditedTask({ ...editedTask, title: txt }));
 
+  // const onChangeDate = (txt: any ) =>
+  //   dispatch(setEditedDate({ ...editedDate, finishDate: any}));
+
   //firebaseに登録
   const createTask = async () => {
     setCreateErr('');

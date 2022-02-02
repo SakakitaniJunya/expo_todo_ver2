@@ -10,6 +10,8 @@ type State = {
   selectedTag: Omit<Tag, 'createdAt'>;
 };
 
+let d = new Date();
+
 const initialState: State = {
   editedTask: { id: '', title: '' },
   selectedTag: { id: '', name: '' },

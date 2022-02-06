@@ -51,17 +51,7 @@ export const CreateTaskScreen: VFC<Props> = ({ navigation }) => {
       </View>
 
       {/* New */}
-      <View style={tw('mb-5 mx-1 items-center ')}>
-        <TextInput
-          style={tw('w-1/2')}
-          autoCapitalize="none"
-          autoFocus
-          multiline
-          placeholder="What Date finished?"
-          //value={editedTask.title}
-          //onChangeText={(txt: any) => onChangeDate(txt)}
-        />
-      </View>
+      <View style={tw('mb-5 mx-1 items-center ')}></View>
 
       <IconButton name="plus" size={20} color="gray" onPress={createTask} />
       {createErr !== '' && (

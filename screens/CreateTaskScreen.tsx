@@ -1,4 +1,4 @@
-import React, { VFC } from 'react';
+import React, { VFC, useState } from 'react';
 import tw from 'tailwind-rn';
 import {
   View,
@@ -6,13 +6,19 @@ import {
   Text,
   SafeAreaView,
   TouchableOpacity,
+  //datetimepicker demo
+  Button,
+  StyleSheet,
 } from 'react-native';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
+
 import { AntDesign } from '@expo/vector-icons';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types/types';
 import { useCreateTask } from '../hooks/useCreateTask';
 import { Title } from '../components/Title';
 import { IconButton } from '../components/IconButton';
+import { fromUnixTime } from 'date-fns/esm';
 
 type Props = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'CreateTask'>;
@@ -23,6 +29,24 @@ export const CreateTaskScreen: VFC<Props> = ({ navigation }) => {
     useCreateTask({
       navigation,
     });
+
+  //datetimepicker--------------------------------------------------
+
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirm = (date: any) => {
+    console.warn('A date has been picked : ', date);
+    hideDatePicker;
+  };
+
+  //datetimepicker--------------------------------------------------
 
   return (
     <SafeAreaView style={tw('flex-1 bg-gray-100')}>
@@ -52,14 +76,12 @@ export const CreateTaskScreen: VFC<Props> = ({ navigation }) => {
 
       {/* New */}
       <View style={tw('mb-5 mx-1 items-center ')}>
-        <TextInput
-          style={tw('w-1/2')}
-          autoCapitalize="none"
-          autoFocus
-          multiline
-          placeholder="What Date finished?"
-          //value={editedTask.title}
-          //onChangeText={(txt: any) => onChangeDate(txt)}
+        <Button title="Show Date Picker" onPress={showDatePicker} />
+        <DateTimePickerModal
+          isVisible={isDatePickerVisible}
+          mode="date"
+          onConfirm={handleConfirm}
+          onCancel={hideDatePicker}
         />
       </View>
 

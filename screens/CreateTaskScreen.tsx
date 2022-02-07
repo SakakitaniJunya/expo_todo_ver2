@@ -1,4 +1,4 @@
-import React, { VFC } from 'react';
+import React, { VFC, useState } from 'react';
 import tw from 'tailwind-rn';
 import {
   View,
@@ -6,8 +6,12 @@ import {
   Text,
   SafeAreaView,
   TouchableOpacity,
+  Button,
+  Platform,
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import DateTimePicker from '@react-native-community/datetimepicker';
+
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types/types';
 import { useCreateTask } from '../hooks/useCreateTask';
@@ -24,8 +28,32 @@ export const CreateTaskScreen: VFC<Props> = ({ navigation }) => {
       navigation,
     });
 
+  const [date, setDate] = useState(new Date(1598051730000));
+  const [mode, setMode] = useState<any>('date');
+  const [show, setShow] = useState(false);
+
+  const onChange = (event: any, selectedDate: any) => {
+    const currentDate = selectedDate || date;
+    setShow(Platform.OS === 'ios');
+    setDate(currentDate);
+  };
+
+  const showMode = (currentMode: any) => {
+    setShow(!show);
+    setMode(currentMode);
+  };
+
+  const showDatepicker = () => {
+    showMode('date');
+  };
+
+  const showTimepicker = () => {
+    showMode('time');
+  };
+
   return (
-    <SafeAreaView style={tw('flex-1 bg-gray-100')}>
+    <SafeAreaView //style={tw('flex-1 bg-gray-100')}
+    >
       <View>
         <TouchableOpacity
           onPress={() => {
@@ -51,7 +79,27 @@ export const CreateTaskScreen: VFC<Props> = ({ navigation }) => {
       </View>
 
       {/* New */}
-      <View style={tw('mb-5 mx-1 items-center ')}></View>
+      <View>
+        {show && (
+          <View style={tw('flex-1 items-center')}>
+            <DateTimePicker
+              style={{ width: 200 }}
+              testID="dateTimePicker"
+              value={date}
+              mode={mode}
+              is24Hour={true}
+              display="default"
+              onChange={onChange}
+            />
+          </View>
+        )}
+        <View>
+          <Button onPress={showDatepicker} title="Show date picker!" />
+        </View>
+        <View>
+          <Button onPress={showTimepicker} title="Show time picker!" />
+        </View>
+      </View>
 
       <IconButton name="plus" size={20} color="gray" onPress={createTask} />
       {createErr !== '' && (

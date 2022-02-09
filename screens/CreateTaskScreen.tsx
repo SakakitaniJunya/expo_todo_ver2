@@ -28,7 +28,7 @@ export const CreateTaskScreen: VFC<Props> = ({ navigation }) => {
       navigation,
     });
 
-  const [date, setDate] = useState(new Date(1598051730000));
+  const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState<any>('date');
   const [show, setShow] = useState(false);
 
@@ -36,6 +36,7 @@ export const CreateTaskScreen: VFC<Props> = ({ navigation }) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === 'ios');
     setDate(currentDate);
+    console.log(date);
   };
 
   const showMode = (currentMode: any) => {
@@ -52,8 +53,7 @@ export const CreateTaskScreen: VFC<Props> = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView //style={tw('flex-1 bg-gray-100')}
-    >
+    <SafeAreaView style={tw('flex-1 bg-gray-100')}>
       <View>
         <TouchableOpacity
           onPress={() => {
@@ -68,7 +68,7 @@ export const CreateTaskScreen: VFC<Props> = ({ navigation }) => {
       <Title first="New" last="Task" />
       <View style={tw('mb-5 mx-1 items-center ')}>
         <TextInput
-          style={tw('w-5/6')}
+          style={tw('mb-5 mx-1')}
           autoCapitalize="none"
           autoFocus
           multiline
@@ -76,31 +76,60 @@ export const CreateTaskScreen: VFC<Props> = ({ navigation }) => {
           value={editedTask.title}
           onChangeText={(txt: string) => onChangeTask(txt)}
         />
-      </View>
+        <TextInput
+          style={tw('mb-5 mx-1')}
+          autoCapitalize="none"
+          autoFocus
+          multiline
+          placeholder="What finish date ?"
+          value={editedTask.title}
+          onPressIn={showDatepicker}
+        />
 
-      {/* New */}
-      <View>
+        <DateTimePicker
+          style={[tw('mb-1 mx-1'), { width: 200 }]}
+          testID="dateTimePicker"
+          value={date}
+          mode={'time'}
+          is24Hour={true}
+          display="spinner"
+          onChange={onChange}
+        />
+
+        <TextInput
+          style={tw('mb-5 mx-1')}
+          autoCapitalize="none"
+          autoFocus
+          multiline
+          placeholder="test time"
+          value={editedTask.title}
+          onChangeText={showTimepicker}
+        />
+
+        {/* New */}
+
         {show && (
-          <View style={tw('flex-1 items-center')}>
-            <DateTimePicker
-              style={{ width: 200 }}
-              testID="dateTimePicker"
-              value={date}
-              mode={mode}
-              is24Hour={true}
-              display="default"
-              onChange={onChange}
-            />
-          </View>
+          <DateTimePicker
+            style={{ width: 90 }}
+            testID="dateTimePicker"
+            value={date}
+            mode={mode}
+            is24Hour={true}
+            display="calendar"
+            onChange={onChange}
+          />
         )}
+
+        {/*
         <View>
           <Button onPress={showDatepicker} title="Show date picker!" />
         </View>
         <View>
           <Button onPress={showTimepicker} title="Show time picker!" />
         </View>
-      </View>
 
+        */}
+      </View>
       <IconButton name="plus" size={20} color="gray" onPress={createTask} />
       {createErr !== '' && (
         <Text style={tw('text-red-500 my-3 font-semibold')}>{createErr}</Text>

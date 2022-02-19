@@ -8,6 +8,7 @@ export type Task = {
   title: string;
   completed: boolean;
   createdAt: string;
+  photo: string;
   //finishedAt: string;
 };
 export type Tag = {

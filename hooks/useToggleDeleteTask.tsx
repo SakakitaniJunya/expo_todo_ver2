@@ -23,12 +23,14 @@ export const useToggleDeleteTask = () => {
           doc(db, 'users', user.uid, 'tags', tag.id, 'tasks', idx),
           {
             //ある値だけを更新
+
             completed: !bool,
           },
           //一部分だけ更新
           { merge: true },
         );
         //初期化(変数)
+
         dispatch(resetEditedTask());
       } catch (err: any) {
         dispatch(resetEditedTask());

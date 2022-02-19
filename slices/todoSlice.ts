@@ -6,7 +6,7 @@ import { TagStackNavigator } from '../navigations/TagStackNavigator';
 
 type State = {
   //createdAtを除く
-  editedTask: Omit<Task, 'completed' | 'createdAt'>;
+  editedTask: Omit<Task, 'completed' | 'createdAt' | 'photo'>;
   selectedTag: Omit<Tag, 'createdAt'>;
 };
 
@@ -24,7 +24,8 @@ export const todoSlice = createSlice({
     //編集データをeditedTaskに格納する
     setEditedTask: (
       state,
-      action: PayloadAction<Omit<Task, 'completed' | 'createdAt'>>,
+      //---------------------------------------ここあやしい
+      action: PayloadAction<Omit<Task, 'completed' | 'createdAt' | 'photo'>>,
     ) => {
       state.editedTask = action.payload;
     },

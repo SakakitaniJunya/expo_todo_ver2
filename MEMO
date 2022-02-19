@@ -1,1 +1,25 @@
-テキストボックスで日付をまずは実装
+画像の実装
+
+TaskListに表示
+する
+CreateTaskの時に画像を挿入登録を可能にする（マストではなくす）
+
+
+TaskList に表示するところから始める
+サンプル画像URL
+https://firebasestorage.googleapis.com/v0/b/todoexpo-327f2.appspot.com/o/7A87B78A-B520-49A3-84A1-C398C83CEDD5_4_5005_c.jpeg?alt=media&token=29424889-ca1d-4294-b450-38cc3c04c046
+
+
+Createするときは、file型
+list表示は　文字列
+
+
+
+
+ここまでの問題点
+
+1 requireで画像がとってこられるのか
+→ますここから検証せよ
+2 全て書き換える必要がある
+
+書き換える場所の記録をとれ

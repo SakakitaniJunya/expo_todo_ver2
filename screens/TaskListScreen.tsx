@@ -32,6 +32,7 @@ export const TaskListScreen: VFC<Props> = ({ navigation }) => {
   const { tag, deleteTask, toggleCompleted } = useToggleDeleteTask();
   const { tasks, getErr } = useGetTasks();
   //コンポーネント単位のlist作成
+
   const tasksKeyExtractor = (item: Task) => item.id;
   const tasksRenderItem = ({ item }: Item) => (
     <TaskItem
@@ -39,6 +40,7 @@ export const TaskListScreen: VFC<Props> = ({ navigation }) => {
       title={item.title}
       createdAt={item.createdAt}
       completed={item.completed}
+      photo={item.photo}
       //callbackを使用　サイレンダリングを防ぐため
       toggleCompleted={toggleCompleted}
       deleteTask={deleteTask}

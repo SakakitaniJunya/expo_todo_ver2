@@ -5,6 +5,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { db } from '../firebaseConfig';
 import { RootStackParamList } from '../types/types';
 import { selectUser } from '../slices/userSlice';
+import * as ImagePicker from 'expo-image-picker';
 
 import {
   selectEditedTask,
@@ -27,6 +28,24 @@ export const useCreateTask = ({ navigation }: Props) => {
   const resetInput = () => {
     dispatch(resetEditedTask());
   };
+
+  // //画像
+  // const [image, setImage] = useState(null);
+  // //画像アップロード
+  // const uploadImage = async () => {
+  //   let result = await ImagePicker.launchImageLibraryAsync({
+  //     mediaTypes: ImagePicker.MediaTypeOptions.All,
+  //     allowsEditing: true,
+  //     aspect: [4, 3],
+  //     quality: 1,
+  //   });
+
+  //   console.log(result);
+
+  //   if (!result.cancelled) {
+  //     setImage(result.uri);
+  //   }
+  // };
 
   const onChangeTask = (txt: string) =>
     //editedTaskの中のtitleだけを随時更新
@@ -62,5 +81,6 @@ export const useCreateTask = ({ navigation }: Props) => {
     createErr,
     createTask,
     resetInput,
+    //uploadImage,
   };
 };

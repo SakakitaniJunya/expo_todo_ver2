@@ -73,6 +73,7 @@ export const CreateTaskScreen: VFC<Props> = ({ navigation }) => {
       // causes crash
       console.log('Uploaded a blob or file!');
     });
+
     setImage(null);
   };
 
